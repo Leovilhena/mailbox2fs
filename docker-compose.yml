@@ -1,0 +1,27 @@
+version: '3.6'
+services:
+  nginx-webdav:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - mailbox:/mailbox:ro
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    environment:
+      - FASTMAIL_USER="${FASTMAIL_USER}"
+    volumes:
+      - mailbox:/mailbox
+    secrets:
+      - fastmail_passwd
+
+secrets:
+  fastmail_passwd:
+    file: ./.fmpasswd
+
+volumes:
+     mailbox:
