@@ -1,0 +1,5 @@
+old/nginx-cache
+old/nginx-pid
+.idea
+*pyc*
+*DS_Store*
